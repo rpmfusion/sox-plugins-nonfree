@@ -3,7 +3,7 @@
 Summary:        Additional (non-free) codecs for sox
 Name:           sox-plugins-nonfree
 Version:        14.3.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 # sox.c is GPLv2, all other is LGPL2.1
 License:        GPLv2+ and LGPLv2+
 Group:          Applications/Multimedia
@@ -93,6 +93,9 @@ find %{buildroot}%{_libdir}/sox -name "*.so" \! -name "*amr*.so" -exec rm -f {} 
 
 
 %changelog
+* Tue Mar 12 2013 Nicolas Chauvet <kwizart@gmail.com> - 14.3.2-3
+- https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Thu Mar 25 2012 Richard Shaw <hobbes1069@gmail.com> - 14.3.2-2
 - Add patches to deal with bundled libraries.
 - Strip rpath from library.
