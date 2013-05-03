@@ -13,7 +13,7 @@
 
 Summary: A general purpose sound file conversion tool
 Name: sox%{?plugins:-plugins-%{plugins}}
-Version: 14.4.1
+Version: 14.4.0
 Release: 3%{?dist}
 License: GPLv2+ and LGPLv2+
 Group: Applications/Multimedia
