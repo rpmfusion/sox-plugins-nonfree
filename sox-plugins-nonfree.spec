@@ -14,7 +14,7 @@
 Summary: A general purpose sound file conversion tool
 Name: sox%{?plugins:-plugins-%{plugins}}
 Version: 14.4.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2+ and LGPLv2+
 Group: Applications/Multimedia
 Source: http://downloads.sourceforge.net/%{realname}/%{realname}-%{version}.tar.gz
@@ -130,6 +130,9 @@ find %{buildroot}%{_libdir}/sox -name "*.so" \! -name "*amr*.so" -exec rm -f {} 
 
 
 %changelog
+* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 14.4.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Tue Apr 02 2013 Frantisek Kluknavsky <fkluknav@redhat.com> - 14.4.1-3
 - added autoreconf to replace old scropts => support aarch64
 
