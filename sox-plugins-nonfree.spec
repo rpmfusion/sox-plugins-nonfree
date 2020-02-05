@@ -10,7 +10,7 @@
 Name:           sox%{?plugins:-plugins-%{plugins}}
 Summary:        A general purpose sound file conversion tool
 Version:        14.4.2
-Release:        8%{?dist}
+Release:        9%{?dist}
 License:        GPLv2+ and LGPLv2+ and MIT
 
 URL:            http://sox.sourceforge.net/
@@ -153,6 +153,9 @@ find %{buildroot}%{_libdir}/sox -name "*.so" \! -name "*amr*.so" -exec rm -f {} 
 
 
 %changelog
+* Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 14.4.2-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Sat Aug 10 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 14.4.2-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
