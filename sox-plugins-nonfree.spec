@@ -13,14 +13,15 @@ Version:        14.4.2
 Release:        16%{?dist}
 License:        GPLv2+ and LGPLv2+ and MIT
 
-URL:            http://sox.sourceforge.net/
-#Source: http://downloads.sourceforge.net/%{realname}/%{realname}-%{version}.tar.gz
+URL:            https://sox.sourceforge.net/
+#Source: http://downloads.sourceforge.net/%%{realname}/%%{realname}-%%{version}.tar.gz
 #Modified source tarball with libgsm license, without unlicensed liblpc10
-#Source: http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+#Source: http://downloads.sourceforge.net/%%{name}/%%{name}-%%{version}.tar.gz
 Source:         %{realname}-%{version}.tar.gz
 
 Patch0:         sox-14.4.2-lsx_error.patch
 Patch1:         sox-14.4.1-lpc10.patch
+Patch2:         sox-sample_tes-t-c99.patch
 
 BuildRequires: libvorbis-devel
 BuildRequires: alsa-lib-devel, libtool-ltdl-devel, libsamplerate-devel
@@ -58,7 +59,6 @@ Narrowband codecs.
 %if ! 0%{?with_plugins_freeworld} && ! 0%{?with_plugins_nonfree}
 %package -n  sox-devel
 Summary: The SoX sound file format converter libraries
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -69,9 +69,7 @@ which will use the SoX sound file format converter.
 
 
 %prep
-%setup -q -n %{realname}-%{version}
-%patch0 -p1
-%patch1 -p1 -b .lpc
+%autosetup -p1 -n %{realname}-%{version}
 #regenerate scripts from older autoconf to support aarch64
 autoreconf -vfi
 
@@ -96,11 +94,11 @@ export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64"
             --without-flac \
             --without-mp3
 %endif
-make %{?_smp_mflags} V=1
+%{make_build}
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
+%{make_install}
 rm -f $RPM_BUILD_ROOT/%{_libdir}/libsox.la
 rm -f $RPM_BUILD_ROOT/%{_libdir}/sox/*.la
 rm -f $RPM_BUILD_ROOT/%{_libdir}/sox/*.a
@@ -114,13 +112,12 @@ find %{buildroot}%{_libdir}/sox -name "*.so" \! -name "*amr*.so" -exec rm -f {} 
 %endif
 
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 
 %files
-%doc AUTHORS ChangeLog COPYING README
+%doc AUTHORS ChangeLog README
+%license COPYING
 %if 0%{?with_plugins_freeworld}
 %{_libdir}/sox/libsox_fmt_mp3.so
 %endif
